@@ -12,24 +12,32 @@ import com.myappexample.entity.User;
 import com.myappexample.repository.UserRepository;
 import com.myappexample.vos.Simulate;
 
+/**
+ * @author diego.lopes.da.costa
+ * Coment: Classe que implementa os métodos de serviço
+ * 
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
 	
-
-
-
+	/**
+	 * Método utilizado para criar um novo cliente
+	 * 
+	 */
 	@Override
 	public void createUser(Map<String, User> params) {
-		System.out.println(">>> Service -  createUser");
 		userRepository.save(params.get("data"));
 	}
 	
+	/**
+	 *  Método utilizado para listar os clientes
+	 * @return liste de clientes ordenados pelo mais recente
+	 */
 	@Override
 	public List <User> getAllUsers(){
-		System.out.println(">>> Service - getAllUsers");
 		return userRepository.findAll(sortByIdDesc());
 	}
 	
@@ -37,17 +45,21 @@ public class UserServiceImpl implements UserService {
         return new Sort(Sort.Direction.DESC, "id");
     }
 	
+	/**
+	 *  Método utilizado para remover um cliente
+	 * 
+	 */
 	@Override
 	public void deleteUser(Map<String, User> params) {
-		System.out.println(">>> Service -  deleteUser");
 		userRepository.deleteById(params.get("data").getId());
 	}
 
+	/**
+	 *  Método utilizado para atualizar um clientee
+	 * 
+	 */
 	@Override
 	public void updateUser(Map<String, User> params) {
-		System.out.println(">>> Service -  updateUser");
-		
-		
 		
 		Optional<User> u = userRepository.findById(params.get("data").getId());
 		u.get().setNome(params.get("data").getNome());
@@ -59,13 +71,15 @@ public class UserServiceImpl implements UserService {
 		u.get().setPatrimonio(params.get("data").getPatrimonio());
 		u.get().setDivida(params.get("data").getDivida());
 		userRepository.save(u.get());
-		
 	}
-
 	
+	/**
+	 *  Método utilizado para calcular o juros de um empéstimo para cada cliente baseado no seu risco
+	 *  Fórmula utilizada: M  =  6000.(1+0,035)12  =  6000. (1,035)12 = 9066,41
+	 * @return double valor do empréstimo
+	 */
 	@Override
 	public double simulate(Simulate objData) {
-		System.out.println(">>> Service -  simulate");
 		
 		double valor_emprestimo = objData.getEmprestimo();
 		int meses = objData.getMeses();
@@ -82,25 +96,9 @@ public class UserServiceImpl implements UserService {
 		}
 	
 		result = valor_emprestimo*(Math.pow((1+taxa), meses));
-
-		System.out.println("resultado = "+result);
-		
-// Fórmula utilizada:
-//				P = R$6.000,00
-//				t = 1 ano = 12 meses
-//				i = 3,5 % a.m. = 0,035
-//				M = ?
-//
-//				Usando a fórmula M=P.(1+i)n, obtemos:
-//
-//				M  =  6000.(1+0,035)12  =  6000. (1,035)12 = 9066,41
 		
 		return result;
-		
 	}
-	
-	
-	
 }
 	
 

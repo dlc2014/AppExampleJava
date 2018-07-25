@@ -10,12 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
+/**
+ * @author diego.lopes.da.costa
+ * Coment: Classe que representa o modelo
+ * 
+ */
 @Entity
 @Table(name="tb_user")
 @SequenceGenerator(name = "SEQ_USER", sequenceName = "SEQ_USER", initialValue=1, allocationSize=1)
 public class User implements Serializable{
-
 
 
 	@Id
