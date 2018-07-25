@@ -1,0 +1,45 @@
+<div class="modal-content" ng-controller="UserModalCtrl">
+<form name="mainForm" ng-submit="simulate()" >
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title">Simular Empréstimo</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputEmrestimo">Valor do Empréstimo</label>
+          <input type="number" class="form-control" name="inputEmprestimo" id="inputEmprestimo" ng-model="user.emprestimo" placeholder="Valor" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+          <span ng-class="error" ng-show="mainForm.inputEmprestimo.$error.required">*Campo obrigatório</span>
+          <span ng-class="error" ng-show="mainForm.inputEmprestimo.$error.number">*Informar valor numérico (ex: 123.32)</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputMeses">Quantidade de Meses</label>
+          <input type="number" class="form-control" id="inputMeses" name="inputMeses" ng-model="user.meses" ng-change="setRisco()" placeholder="Meses" ng-pattern="/^[0-9]+?$/" step="1.00" required>
+          <span ng-class="error" ng-show="mainForm.inputMeses.$error.required">*Campo obrigatório</span>
+          <span ng-class="error" ng-show="mainForm.inputMeses.$error.number">*Informar valor numérico inteiro (ex: 12)</span>
+        </div>
+      </div>
+    </div>
+ <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputNome">Valor à pagar: {{resultSimulation}}</label>
+        </div>
+      </div>
+</div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success btn-with-icon" ng-disabled="mainForm.$invalid">
+    <i class="ion-android-checkmark-circle"></i>
+    Simular
+    </button>
+  </div>
+  </form>
+</div>

@@ -1,0 +1,108 @@
+<div class="modal-content" ng-controller="UserModalCtrl">
+<form name="mainForm" ng-submit="createOrUpdateUser()" >
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title">Dados do Cliente</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputNome">Nome</label>
+          <input type="text" class="form-control" id="inputNome" ng-model="user.nome" name="inputNome" placeholder="Nome" required >
+          <span ng-class="error" ng-show="mainForm.inputNome.$error.required">*Campo obrigatório</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputRendimento">Rendimento R$</label>
+          <input type="number" class="form-control" id="inputRendimento" name="inputRendimento" ng-model="user.rendimento" ng-change="setRisco()" placeholder="Rendimento R$" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+          <span ng-class="error" ng-show="mainForm.inputRendimento.$error.required">*Campo obrigatório (ex: 123.32)</span>
+          <span ng-class="error" ng-show="mainForm.inputRendimento.$error.number">*Informar valor numérico (ex: 123.32)</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputEndereco">EndereÃƒÂ§o</label>
+          <input type="text" class="form-control" id="inputEndereco" ng-model="user.endereco" placeholder="EndereÃƒÂ§o">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputRisco">Risco</label>
+          <input type="text" class="form-control" id="inputRisco" ng-model="user.risco" ng-disabled="true">
+        </div>
+      </div>
+    </div>
+<div class="row">
+ <div class="col-sm-6">
+ <div class="form-group">
+ <label for="inputTipoCliente">Tipo Cliente</label>
+      <div class="input-demo radio-demo row" >
+	    <div class="col-md-4">
+	      <label class="radio-inline custom-radio nowrap">
+	        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" ng-model="user.tipo" value="Comum" ng-change="setEnabledFields()" >
+	        <span>Comum</span>
+	      </label>
+	    </div>
+	    <div class="col-md-4">
+	      <label class="radio-inline custom-radio nowrap">
+	        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" ng-model="user.tipo" value="Potencial" ng-change="setEnabledFields()">
+	        <span>Potencial</span>
+	      </label>
+	    </div>
+	    <div class="col-md-4">
+	      <label class="radio-inline custom-radio nowrap">
+	        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" ng-model="user.tipo" value="Especial" ng-change="setEnabledFields()">
+	        <span>Especial</span>
+	      </label>
+    	</div>
+ 	 </div>
+  </div>
+  </div>
+  
+  <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputValorPatrimonio">EstÃ¡ Empregado?</label>
+          <div class="input-demo checkbox-demo row">
+          	<div class="col-md-4">
+	          	<label class="checkbox-inline custom-checkbox nowrap">
+		          	<input type="checkbox" id="inlineCheckbox01" value="user.empregado" ng-model="user.empregado"  ng-disabled="disabledEmpregado"> 
+		          	<span>Sim</span>
+	          	</label>
+          	</div>
+          	</div>
+        </div>
+</div>
+  
+ </div>
+     <div class="row">
+      <div class="col-sm-6">
+		<div class="form-group">
+          <label for="inputValorPatrimonio">Valor Total PatrimÃ´nio</label>
+          <input type="number" class="form-control" id="inputValorPatrimonio" name="inputPatrimonio" ng-model="user.patrimonio"  ng-disabled="disabledPatrimonio" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" >
+          <span ng-class="error" ng-show="mainForm.inputPatrimonio.$error.number">*Informar valor numérico (ex: 123.32)</span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputRisco">Valor de DÃ­vidas Atuais</label>
+          <input type="number" class="form-control" id="inputDivida" ng-model="user.divida" name="inputDivida" ng-disabled="disabledDivida" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" >
+          <span ng-class="error" ng-show="mainForm.inputDivida.$error.number">*Informar valor numérico (ex: 123.32)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success btn-with-icon" ng-disabled="mainForm.$invalid">
+    <i class="ion-android-checkmark-circle"></i>
+    Confirmar
+    </button>
+  </div>
+  </form>
+</div>

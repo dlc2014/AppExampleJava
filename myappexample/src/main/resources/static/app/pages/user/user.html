@@ -1,0 +1,70 @@
+<div class="widgets">
+ <div class="col-lg-12 col-md-12">
+ <div class="row">
+  <div class="col-lg-6 col-md-12">
+    <button type="button" class="btn btn-success btn-with-icon" data-toggle="modal" 
+            ng-click="showModalToCreateUser()">
+      <i class="ion-android-checkmark-circle"></i>
+      Adicionar Cliente
+  </button>
+  </div>
+</div>
+</div>
+
+<div class="col-lg-12 col-md-12">
+    <div class="panel with-scroll table-panel animated zoomIn" zoom-in="">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title">Lista de Clientes</h3>
+      </div>
+      <div class="panel-body" >
+        <div class="vertical-scroll">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="table-id">#</th>
+                <th>Nome</th>
+                <th>Rendimento</th>
+                <th>Endereço</th>
+                <th>Risco</th>
+                <th>Tipo Cliente</th>
+                <th>Está Empregado?</th>
+                <th>Valor Patromônio</th>
+                <th>Valor Dívida</th>
+                <th>Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- ngRepeat: item in smartTableData -->
+              <tr ng-repeat="item in listUsers">
+                <td class="table-id">{{item.id}}</td>
+                <td>{{item.nome}}</td>
+                <td>{{item.rendimento}}</td>
+                <td>{{item.endereco}}</a></td>
+                <td>{{item.risco}}</a></td>
+                <td>{{item.tipo}}</a></td>
+                <td>{{item.empregado}}</a></td>
+                <td>{{item.patrimonio}}</a></td>
+                <td>{{item.divida}}</a></td>
+                <td>
+       				<button type="button" class="status-button btn btn-xs btn-warning" 
+	                   	ng-click="showModalToSimulate(item)">
+	                 		Simular
+	               	</button>
+                 	<button type="button" class="status-button btn btn-xs btn-info" 
+	                     ng-click="showModalToEditUser(item)">
+	                   Editar
+	                 </button>
+	                 <button type="button" class="status-button btn btn-xs btn-danger" 
+	                         ng-click="deleteUser(item)">
+	                   Deletar
+	                 </button>
+                </td>
+              <!-- end ngRepeat: item in smartTableData -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>
