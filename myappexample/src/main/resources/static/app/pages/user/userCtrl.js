@@ -40,12 +40,11 @@
       	})
       	.success(
       		function(data) {
-      			console.log("GET USERS SUCESSO",data)
       			$scope.listUsers = data;
   		
       	})
           .error(function(result) {
-          	console.log("ERRO GET ALL USERS",result);
+          	alert("Falha ao listar clientes!")
           });
       };
       $scope.getAllUsers();
